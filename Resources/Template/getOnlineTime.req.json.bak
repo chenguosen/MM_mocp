@@ -1,0 +1,19 @@
+{
+    "msgReq":{
+        "msgHeader":{
+            "msgType":"verifyMobileReq",
+            "version":"1.0",
+            "appType":"200",
+            "appId":"100000000093"
+        },
+        "msgBody":{
+            "systemTime":"20190716144102941",
+            "clientIp":"192.168.16.1",
+            "clientState":"9287615632592627078d1a0060b53458",
+            "operatorType":"1",
+            "msisdn":"nmG9J6NcfOrPcvjx8fsTGQ==",
+            "expandParams":"key:1",
+            "sign":"7101A0DDF96BDB32B8D637A6F4704060"
+        }
+    }
+}

@@ -1,0 +1,7 @@
+*** Settings ***
+Resource          ../../KeyWords/Pub/EtherumLibs.robot
+
+*** Test Cases ***
+3
+    ${g}    count    3    4
+    log    ${g}
