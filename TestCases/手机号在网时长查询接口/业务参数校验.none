@@ -1,0 +1,11 @@
+*** Settings ***
+Resource          ../../KeyWords/Biz/通用业务逻辑处理.robot
+Resource          ../../KeyWords/Biz/手机号在网时长查询业务.robot
+
+*** Test Cases ***
+appid节点不存在，校验失败，返回错误码
+    读取手机号在网时长查询模板
+    TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
+    校验应答字段值    $.msgResp.msgBody.result=0
+    扣费记录数据库入库检查
+    扣费成功redis预授权余额检查

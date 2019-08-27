@@ -1,0 +1,19 @@
+{
+	"pubInfo": {
+		"appId": "12345678",
+		"reqTime": "20170308100000",
+		"ver": "1.0",
+		"tid": "0fad858e5e16c289409d9aa54f627c72",
+		"cbUrl": "http://www.busiabc.com/openaccountnotice",
+		"sign": "80e5adaec47d41748628e1715d903ad"
+	},	
+	"pageInfo": {
+		"currentPage": "1",
+		"pageSize":"10"
+	},
+	"busiInfo": {
+		"userId": "20170308100000",
+		"beginDate":"20190520",
+		"endDate":"20190630"
+	}
+}
