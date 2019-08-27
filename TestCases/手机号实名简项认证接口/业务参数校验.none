@@ -1,8 +1,0 @@
-*** Settings ***
-
-*** Test Cases ***
-appid节点不存在，校验失败，返回错误码
-    读取手机号在网状态查询模板
-    删除请求节点    $.msgReq.msgHeader.appId
-    TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
-    校验应答字段值    $.msgResp.msgBody.result=200007
