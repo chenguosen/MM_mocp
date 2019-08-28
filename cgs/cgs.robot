@@ -59,6 +59,7 @@ chenguosen用例
 SSH操作
     ${output}    某路径执行命令    /opt/aspire/product/mm_tnc/tnc_client/log/debug/cgs    df -h
     log    ${output}
+    log    ${output}
 
 上传文件
     ${host_infos}    Get From Dictionary    ${TNC_Hosts}    A
