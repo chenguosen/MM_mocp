@@ -32,6 +32,7 @@ redis
     写String    KEY_APP_DAILY_TIMES_USING_100000000251    13
     ${a}    根据key取String    KEY_PRELICENSE_BALANCE_2000010017001
     log    ${a}
+    log    ${a}
 
 redis2
     ${r}    Redis
@@ -79,5 +80,9 @@ SSH操作
     log    ${res}
 
 JAVA
+    ${res}    liveauth.getliveparam    15818640852    26355dfec55345d4905b3bf93f6eb29c
+    log    ${res}
+
+JAVA4444
     ${res}    liveauth.getliveparam    15818640852    26355dfec55345d4905b3bf93f6eb29c
     log    ${res}
