@@ -82,4 +82,3 @@ SSH操作
 JAVA
     ${res}    liveauth.getliveparam    15818640852    26355dfec55345d4905b3bf93f6eb29c
     log    ${res}
-    log    ${res}
