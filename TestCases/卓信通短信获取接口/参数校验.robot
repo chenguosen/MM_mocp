@@ -1,6 +1,6 @@
 *** Settings ***
 Resource          ../../KeyWords/Biz/通用业务逻辑处理.robot
-Resource          ../../KeyWords/Biz/卓信通短信获取.robot
+Resource          ../../KeyWords/Biz/卓信通短信获取业务.robot
 Resource          ../../KeyWords/Pub/JsonObjLib.robot
 Resource          ../../Resources/Global_Variable.robot
 
@@ -30,7 +30,7 @@ appid数据类型不对，校验失败，返回错误码
     更新节点数据    $.msgReq.msgHeader.appId=(int)100000000093
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     log    ${resp}
-    校验应答字段值    $.msgResp.msgBody.result=400005    $.msgResp.msgBody.message=短信平台请求错误
+    校验应答字段值    $.msgResp.msgBody.result=0    $.msgResp.msgBody.message=成功
 
 appid长度超过50，校验失败，返回错误码
     读取卓信通短信消息模板

@@ -77,7 +77,7 @@ SSH操作
     关闭当前远程连接
 
 调用Java库
-    ${res}    getliveparam    15818640852    26355dfec55345d4905b3bf93f6eb29c
+    ${res}    getliveparam    13187802375    26355dfec55345d4905b3bf93f6eb29c
     log    ${res}
 
 JAVA

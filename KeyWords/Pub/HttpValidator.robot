@@ -47,7 +47,7 @@ Library           ../../Library/utilLibrary.py
     \    ${real_value}    获取Json变量值    ${json_obj}    ${key}
     \    ${expect_value}    robotPatch.Custom Json Value Lstrip    ${expect_value}
     \    Run Keyword If    '${expect_value}'=='*'    Return From Keyword
-    \    Should Be Equal As Strings    ${real_value}    ${expect_value}
+    \    Run Keyword And Continue On Failure    Should Be Equal As Strings    ${real_value}    ${expect_value}
 
 校验Http响应字段长度
     [Arguments]    ${jsonpath}    ${expect_list_length}=1

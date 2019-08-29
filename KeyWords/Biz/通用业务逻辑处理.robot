@@ -217,7 +217,7 @@ TNC发送Reqx请求
 读取请求后的预授权余额
     ${validAmount_end}    根据key取String    KEY_PRELICENSE_BALANCE_${preLicenseID}
     Set Test Variable    ${validAmount_end}
-    ${validAmount_DB_end}    数据库查询_返回单值    SELECT validAmount FROM T_PreLicense WHERE preLicenseID IN (SELECT preLicenseID FROM T_PreLicense4App WHERE appid='${appid}') and status ='0';
+    ${validAmount_DB_end}    数据库查询_返回单值    SELECT validAmount FROM T_PreLicense WHERE preLicenseID IN (SELECT preLicenseID FROM T_PreLicense4App WHERE appid='${appid}' and LEVEL in (SELECT min(level) FROM T_PreLicense4App WHERE appid='${appid}')) and status ='0';
     ${validAmount_DB_end}    BuiltIn.Convert To String    ${validAmount_DB_end}
     Set Test Variable    ${validAmount_DB_end}
     [Return]    ${validAmount_end}    ${validAmount_DB_end}
@@ -225,14 +225,14 @@ TNC发送Reqx请求
 读取请求前的预授权余额
     ${validAmount_start}    根据key取String    KEY_PRELICENSE_BALANCE_${preLicenseID}
     Set Test Variable    ${validAmount_start}
-    ${validAmount_DB_start}    数据库查询_返回单值    SELECT validAmount FROM T_PreLicense WHERE preLicenseID IN (SELECT preLicenseID FROM T_PreLicense4App WHERE appid='${appid}') and status ='0';
+    ${validAmount_DB_start}    数据库查询_返回单值    SELECT validAmount FROM T_PreLicense WHERE preLicenseID IN (SELECT preLicenseID FROM T_PreLicense4App WHERE appid='${appid}' and LEVEL in (SELECT min(level) FROM T_PreLicense4App WHERE appid='${appid}')) and status ='0';
     ${validAmount_DB_start}    BuiltIn.Convert To String    ${validAmount_DB_start}
     Set Test Variable    ${validAmount_DB_start}
     [Return]    ${validAmount_start}    ${validAmount_DB_start}
 
 获取销售品的客户售单价
     [Arguments]    ${appid}    ${capabilityType}
-    ${saleprice}    数据库查询_返回单值    SELECT salePrice FROM t_product WHERE productID in (SELECT productID FROM t_account4product where accountID in (select accountID FROM T_PreLicense where preLicenseID in (SELECT preLicenseID FROM T_PreLicense4App WHERE appid='${appid}'))) and capabilityType='${capabilityType}';    #获取销售品的客户售单价
+    ${saleprice}    数据库查询_返回单值    SELECT salePrice \ FROM t_product WHERE productID \ in (SELECT productID FROM t_account4product where accountID in (select accountID FROM T_PreLicense WHERE preLicenseID IN (SELECT preLicenseID FROM T_PreLicense4App WHERE appid='${appid}' and LEVEL in (SELECT min(level) FROM T_PreLicense4App WHERE appid='${appid}')) and status ='0')) and capabilityType='${capabilityType}';    #获取销售品的客户售单价
     [Return]    ${saleprice}
 
 恢复预授权和应用关联关系
