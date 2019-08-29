@@ -17,7 +17,7 @@ def getliveparam(content, keyStr):
     """
     # 获取jar包地址，os.path.abspath('.')返回当前工作地址，也就是robotframework项目文件夹
     home = os.path.abspath('.')
-    #print(home)
+    print(home)
     jarpath = os.path.join(os.path.abspath(
         '.'), home + '/javalibs/CryptUtil.jar')
     # 上面那句也可以如下写成绝对地址，写成绝对地址时可以将jar包放在任意位置，但jar位置变了这里就得改
