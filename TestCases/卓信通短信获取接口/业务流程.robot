@@ -13,7 +13,7 @@ Resource          ../../KeyWords/Biz/通用业务逻辑处理.robot
     ${validAmount_end}    ${validAmount_DB_end}    读取请求后的预授权余额
     扣费记录数据库入库检查
     扣费成功redis预授权余额检查
-    sleep    120    #卓信通短信获取同一个号码2分钟内不能重复请求
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 redis里key不存在，返回错误码
     ${c}    根据key取String    KEY_PRELICENSE_BALANCE_${preLicenseID}
@@ -22,6 +22,7 @@ redis里key不存在，返回错误码
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=300203
     写String    KEY_PRELICENSE_BALANCE_${preLicenseID }    ${c}    #恢复缓存数据
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 预授权余额=阀值+单价+0.1厘，扣费成功
     ${validAmount_start}    ${validAmount_DB_start}    读取请求前的预授权余额
@@ -37,6 +38,7 @@ redis里key不存在，返回错误码
     Run Keyword And Continue On Failure    Should Be Equal As Strings    ${value}    ${saleprice}
     ${c}    Evaluate    ${validAmount_start}-${saleprice}
     恢复预授权缓存数据    ${c}
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 预授权余额=阀值+单价，扣费失败，返回错误码
     ${validAmount_start}    ${validAmount_DB_start}    读取请求前的预授权余额
@@ -52,6 +54,7 @@ redis里key不存在，返回错误码
     Should Be Equal As Strings    ${value}    0
     恢复预授权缓存数据    ${validAmount_start}
     恢复预授权和应用关联关系
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 预授权余额=阀值+单价-0.1厘，扣费失败，返回错误码
     ${validAmount_start}    ${validAmount_DB_start}    读取请求前的预授权余额
@@ -67,6 +70,7 @@ redis里key不存在，返回错误码
     Should Be Equal As Strings    ${value}    0
     恢复预授权缓存数据    ${validAmount_start}
     恢复预授权和应用关联关系
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 IP在缓存中无，数据库中有，鉴权失败，返回错误码
     ${localhost}    get host ip
@@ -78,6 +82,7 @@ IP在缓存中无，数据库中有，鉴权失败，返回错误码
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=200011
     向集合写一个值    KEY_WHITE_IP_SET_${spCode}    "${localhost}"    #redis添加IP白名单
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 IP在缓存中无，数据库中无，鉴权失败，返回错误码
     ${localhost}    get host ip
@@ -88,6 +93,7 @@ IP在缓存中无，数据库中无，鉴权失败，返回错误码
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=200011
     向集合写一个值    KEY_WHITE_IP_SET_${spCode}    "${localhost}"    #redis添加IP白名单
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 clientState请求重复，校验失败，返回错误码
     读取卓信通短信消息模板
@@ -95,12 +101,14 @@ clientState请求重复，校验失败，返回错误码
     校验应答字段值    $.msgResp.msgBody.result=0
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=200005
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 appid不存在，校验失败，返回错误码
     读取卓信通短信消息模板
     重置节点数据    $.msgReq.msgHeader.appId=900000000285
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=300101
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 应用状态为待审批，校验失败，返回错误码
     ${app_info}    根据key取String    KEY_APP_INFO_${appid}
@@ -110,6 +118,7 @@ appid不存在，校验失败，返回错误码
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=300103
     写String    KEY_APP_INFO_${appid}    ${app_info}    #恢复reids数据
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 应用状态为草稿，校验失败，返回错误码
     ${app_info}    根据key取String    KEY_APP_INFO_${appid}
@@ -119,6 +128,7 @@ appid不存在，校验失败，返回错误码
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=300103
     写String    KEY_APP_INFO_${appid}    ${app_info}    #恢复reids数据
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 应用状态为配置完成，校验失败，返回错误码
     ${app_info}    根据key取String    KEY_APP_INFO_${appid}
@@ -128,6 +138,7 @@ appid不存在，校验失败，返回错误码
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=300103
     写String    KEY_APP_INFO_${appid}    ${app_info}    #恢复reids数据
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 应用状态为已驳回，校验失败，返回错误码
     ${app_info}    根据key取String    KEY_APP_INFO_${appid}
@@ -137,12 +148,14 @@ appid不存在，校验失败，返回错误码
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=300103
     写String    KEY_APP_INFO_${appid}    ${app_info}    #恢复reids数据
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 签名错误，请求签名验证失败，返回错误码
     读取卓信通短信消息模板
     重置节点数据    $.msgReq.msgBody.sign=1234567890
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=200006
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
 
 预授权的运营商丢失，校验失败，返回错误码
     删除key    KEY_PRELICENSE_PROVIDER_500
@@ -150,3 +163,13 @@ appid不存在，校验失败，返回错误码
     TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
     校验应答字段值    $.msgResp.msgBody.result=300204    $.msgResp.msgBody.message=该预授权的能力提供方没有对应的供应商信息
     Server发送Reqx请求    /web/tnc/server/redis/syncProvider
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
+
+同一应用、手机号码10秒内不能重复请求
+    读取卓信通短信消息模板
+    TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
+    校验应答字段值    $.msgResp.msgBody.result=0    $.msgResp.msgBody.message=成功
+    读取卓信通短信消息模板
+    TNC发送Reqx请求    /tnc/client/threeFuse/${req_flag}
+    校验应答字段值    $.msgResp.msgBody.result=200013    $.msgResp.msgBody.message=同一app的短信号码提交重复
+    sleep    11    #同一个应用、手机号测试环境限制10内不能重复请求，现网配置120秒KEY_REPEATED_MOBILE_VALID_100000000093_13187802375
